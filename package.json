@@ -21,7 +21,7 @@
     "transitions",
     "paging"
   ],
-  "homepage": "https://github.com/jitta/jchart",
-  "repository": "git://github.com/jitta/jchart",
+  "homepage": "https://github.com/yanawaro/ream",
+  "repository": "git@github.com:yanawaro/ream.git",
   "license": "MIT"
 }
