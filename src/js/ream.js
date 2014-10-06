@@ -7,13 +7,6 @@
   $('.slide:not(:last)').addClass('shadow');
 
   var shadowWidth = $('.slide').css('box-shadow').split(" ");
-  $('.slide').css({
-      width: $(window).width(),
-      height: $(window).height()
-  });
-  $('.container').css({
-      height: $('.slide').height() * $('.slide').size()
-  });
 
   $('.slide:not(:first)').each(function(i, item) {
       $(this).css({
@@ -33,7 +26,7 @@
   };
   refTop.bottom = current.height();
 
-  var onScroll = function(w) {
+  var onScroll = function (w) {
       console.log(w.scrollTop() + ' ' + refTop.top + ' ' + refTop.bottom);
       if (w.scrollTop().between(refTop.top, refTop.bottom, true) || w.scrollTop() < 0) {} else {
           if (w.scrollTop() > refTop.bottom) {
@@ -60,12 +53,25 @@
       }
   }
 
+  var onResize = function (w) {
+    $('.slide').css({
+      width: w.width(),
+      height: w.height()
+    });
+    $('.container').css({
+        height: $('.slide').height() * $('.slide').size()
+    });
+  }
+
   $(window).on({
-      'scroll': function(e) {
-          onScroll($(this));
+      scroll: function (e) {
+        onScroll($(this));
       },
-      'touchmove': function(e) {
-          onScroll($(this));
+      touchmove: function (e) {
+        onScroll($(this));
+      },
+      resize: function (e) {
+        onResize($(this));
       }
   });
 
