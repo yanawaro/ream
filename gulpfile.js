@@ -1,4 +1,5 @@
 var gulp = require('gulp'),
+    plumber = require('gulp-plumber'),
     rename = require('gulp-rename'),
     stylus = require('gulp-stylus'),
     concat = require('gulp-concat-util'),
@@ -13,6 +14,7 @@ gulp.task('css', function () {
   gulp.src( [
     './src/styl/ream.styl',
   ])
+    .pipe(plumber())
     .pipe(stylus())
     .pipe(gulp.dest('./dist/'))
     .pipe(rename('ream.min.css'))
@@ -24,6 +26,7 @@ gulp.task('js', function() {
   gulp.src( [
     './src/js/ream.js',
   ])
+    .pipe(plumber())
     .pipe(concat.header(header))
     .pipe(concat.footer(footer))
     .pipe(gulp.dest('./dist/'))
