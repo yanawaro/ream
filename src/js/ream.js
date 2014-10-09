@@ -4,23 +4,25 @@
       return inclusive ? this >= min && this <= max : this > min && this < max;
   };
 
-  $('.slide:not(:last)').addClass('shadow');
+  var ream = $('.container');
 
-  var shadowWidth = $('.slide').css('box-shadow').split(" ");
+  ream.find('.slide:not(:last)').addClass('shadow');
 
-  $('.slide:not(:first)').each(function(i, item) {
+  var shadowWidth = ream.find('.slide').css('box-shadow').split(" ");
+
+  ream.find('.slide:not(:first)').each(function(i, item) {
       $(this).css({
           position: 'fixed',
           'z-index': 9 - i
       });
   })
-   $('.slide:first').css({
+  ream.find('.slide:first').css({
       left: -9,
       top: -9,
       'z-index': 10
   });
 
-  var current = $('.slide:first');
+  var current = ream.find('.slide:first');
   var refTop = {
       top: 0
   };
@@ -54,12 +56,12 @@
   }
 
   var onResize = function (w) {
-    $('.slide').css({
+    ream.find('.slide').css({
       width: w.width(),
       height: w.height()
     });
-    $('.container').css({
-        height: $('.slide').height() * $('.slide').size()
+    ream.css({
+        height: ream.find('.slide').height() * ream.find('.slide').size()
     });
   }
 
@@ -74,6 +76,8 @@
         onResize($(this));
       }
   });
+
+  $(window).trigger('resize');
 
    ////////////////////////////////////////////////////////
 
