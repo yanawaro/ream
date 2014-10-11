@@ -14,3 +14,9 @@
   -moz-box-shadow: 0px 9px 20px 2px #222;
   box-shadow: 0px 9px 20px 2px #222;
 }
+.container .slide:nth-child(odd) {
+  background: #00ced1;
+}
+.container .slide:nth-child(even) {
+  background: #ff7f50;
+}
