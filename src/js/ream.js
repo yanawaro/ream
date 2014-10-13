@@ -6,42 +6,26 @@
 
   var ream = $('.container');
 
-  ream.find('.slide:not(:last)').addClass('shadow');
-
-  var shadowWidth = ream.find('.slide').css('box-shadow').split(" ");
-
-  ream.find('.slide:not(:first)').each(function(i, item) {
-      $(this).css({
-          position: 'fixed',
-          'z-index': 9 - i
-      });
-  })
-  ream.find('.slide:first').css({
-      left: -9,
-      top: -9,
-      'z-index': 10
-  });
-
-  var current = ream.find('.slide:first');
-  var refTop = {
-      top: 0
-  };
-  refTop.bottom = current.height();
-
   var onScroll = function (w) {
-      console.log(w.scrollTop() + ' ' + refTop.top + ' ' + refTop.bottom);
+      //console.log(w.scrollTop() + ' ' + refTop.top + ' ' + refTop.bottom);
+      console.log(w.scrollTop().between(refTop.top, refTop.bottom, true));
       if (w.scrollTop().between(refTop.top, refTop.bottom, true) || w.scrollTop() < 0) {} else {
+          console.log('in');
           if (w.scrollTop() > refTop.bottom) {
+              console.log(w.scrollTop() + ' ' + refTop.top + ' ' + refTop.bottom);
+              console.log('next');
               var next = current.next('.slide');
               refTop.top = refTop.bottom;
               refTop.bottom = refTop.bottom + next.height();
               next.css({
                   position: 'relative',
-                  left: -9,
-                  top: -9
+                  left: -8,
+                  top: -8
               });
               current = next;
           } else {
+              console.log(w.scrollTop() + ' ' + refTop.top + ' ' + refTop.bottom);
+              console.log('prev');
               var prev = current.prev('.slide');
               refTop.bottom = refTop.top;
               refTop.top = refTop.top - prev.height();
@@ -78,6 +62,31 @@
   });
 
   $(window).trigger('resize');
+
+  ream.find('.slide:not(:last)').addClass('shadow');
+
+  var shadowWidth = ream.find('.slide').css('box-shadow').split(" ");
+  console.log(shadowWidth);
+  ream.find('.slide:not(:first)').each(function(i, item) {
+      $(this).css({
+          position: 'fixed',
+          'z-index': 9 - i,
+          left: 0,
+          top: 0,
+      });
+  })
+
+  ream.find('.slide:first').css({
+      left: -8,
+      top: -8,
+      'z-index': 10
+  });
+
+  var current = ream.find('.slide:first');
+  var refTop = {
+      top: 0
+  };
+  refTop.bottom = current.height();
 
    ////////////////////////////////////////////////////////
 
